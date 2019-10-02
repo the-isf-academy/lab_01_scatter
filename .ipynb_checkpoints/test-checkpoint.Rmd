@@ -16,8 +16,6 @@ jupyter:
 # %autosave 0
 ```
 
-testing markdown formatting
-
 # Welcome to a Jupyter Notebook!
 
 Jupyter Notebooks are interactive interfaces which mix python code with text and output, like if your python files in Atom could talk back to you.
