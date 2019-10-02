@@ -1,0 +1,180 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.1'
+      jupytext_version: 1.2.4
+  kernelspec:
+    display_name: Python 3
+    language: python
+    name: python3
+---
+
+# Creating a scatter plot
+
+Together with your group, you will create a scatter plot to display the relationship between two variables in your data (an x and a y variable).
+
+To do this, each member of your team will be responsible for writing a piece of the code to draw the plot. Then, you'll pull each piece of code together in this notebook to make a scatter plot function.
+
+
+## Setup
+
+
+First, we'll import the functions to draw using the turtle libray.
+
+(Here, I'm also importating from random to make a database but the students will have real data)
+
+```{python}
+from random import randint
+from turtle import *
+```
+
+Next, we need to define some aspects of the scatterplot we'll be drawing:
+   - **origin_screen_x** - the x-coordinate on the turtle screen where the plot origin will be drawn
+   - **origin_screen_y** - the x-coordinate on the turtle screen where the plot origin will be drawn
+   - **x_axis_length** - the width of the plot
+   - **y_axis_length** - the height of the plot
+   - **x_axis_domain** - the domain that the plot's x-axis will span
+   - **x_axis_increment** - the space between each tick mark on the x-axis
+   - **y_axis_domain** - the domain that the plot's y-axis will span
+   - **y_axis_increment** - the space between each tick mark on the y-axis
+   - **tick_size** - the size of the tick mark on the axes
+
+Every function you write will need to use these settings so that the function can draw a scatter plot with any of these settings changed.
+
+```{python}
+plot_settings = {
+    'origin_screen_x': -100,
+    'origin_screen_y': -100,
+    'x_axis_length': 300,
+    'y_axis_length': 300,
+    'x_axis_domain': (0,100),
+    'x_axis_increment': 5,
+    'y_axis_domain': (0,100),
+    'y_axis_increment': 5,
+    'tick_size': 4
+}
+```
+
+Additionally, to help you manage your data, we've provided you with this function to "clamp" your data so that it will always fall within the boundaries of the x- and y- axis of your plot.
+
+```{python}
+def clamp_point(x, domain):
+    if x < domain[0]:
+        return domain[0]
+    if x > domain[1]:
+        return domain[1]
+    return x
+
+def clamp_database(db):
+    x_axis_low = plot_settings['x_axis_domain'][0]
+    y_axis_low = plot_settings['y_axis_domain'][0]
+    x_axis_high = plot_settings['x_axis_domain'][1]
+    y_axis_high = plot_settings['y_axis_domain'][1]
+    
+    x_domain = (x_axis_low, x_axis_high)
+    y_domain = (y_axis_low, y_axis_high)
+    for i in range(len(db)):
+        x_clamp = clamp_point(db[i][0], x_domain)
+        y_clamp = clamp_point(db[i][1], y_domain)
+        db[i] = (x_clamp, y_clamp)
+    return db
+```
+
+## Your functions
+
+Since this is your first time working on a task this large, we've already decomposed the program into the following functions (described more below):
+   - `scale(x, old_domain, new_domain)`
+   - `draw_axis(ax)`
+   - `plot_point(db)`
+
+🛑 👀 🛑 **Before you start writing your function(s), make sure to read over this outline as a whole so you know how your function will be expected to interact with the other functions.**
+
+Code is like a jigsaw puzzle: if you're piece doesn't fit correctly, the big picture can't come together.
+
+
+### 💻 scale( )
+
+One of the more conceptually difficult challenges of this program will be translating between the coordinates of the scatter plot \[the (x,y) coordinates from your data\] and the coordinates of the screen where the turtle draws \[the (x,y) coordinates you will give the turtle\].
+
+To help make this translation easier, one member of your group will write a function that takes a number `x` that falls between the lower and upper bounds of `old_domain` and scales it so that is falls in the same place between the lower and upper bounds of `new_domain`.
+
+For example, say you have a scatter plot with width and height 100. However, you only want your x- and y-axis to span from 0 to 10. `Scale` should translate points that fall from 0-10 to fall in the same way from 0-100. So, scaling 5 would give you 50, 7 would get you 70, etc.
+
+For the `scale()` function, the `old_domain` and `new_domain` parameters will be the tuple `(*low_end*, *high_end*)`. So, to access the low end of the old domain, you would use `old_domain[0]` and to access the high end of the new domain you would use `new_domain[1]`.
+
+```{python}
+def scale(x, old_domain, new_domain):
+    # YOUR CODE HERE
+    return new_x
+```
+
+### 💻 draw_axis( )
+
+This function is responsible for drawing the x- and y- axis of the scatter plot along with tick marks marking the distance. This function should be abstracted so that it can draw either the x- or y-axis based on the `ax` paramenter (which will either be a string `'x'` or `'y'`).
+
+To accomplish this task, you'll need to think about how to draw tick marks that are distanced based on the size of the plot but that represent increments relative to the domain of the axis. For example, say your axis has a length of 100 turtle distance units and a domain between 0-10. If you wanted to draw ticks for each integer in the domain (0, 1, 2, ..., 10), you would need to draw 11 ticks each spaced 10 turtle distance units apart.
+
+Additionally, you'll need to think about how to make this function work for bothe the x- and y-axis. The manequin project from unit 0 could offer some insights into how to do this.
+
+```{python}
+def draw_axis(ax):
+    # YOUR CODE HERE
+```
+
+### 💻 plot_points( )
+
+Finally, you will need to actually plot the points on the scatter plot. This will consist of going through each point in your database and determining what each point's location will be on the turtle screen.
+
+You can assume that your teammates will provide you with a scale function described above. This will be helpful when determing what a point's scaled values will be, but you will need to figure out what domain you need to scale from and what domain you will scale to.
+
+To help you out, we've pulled out another function `make_cross()` which should be useful which will draw a cross in the turtle's current position.
+
+```{python}
+def make_cross():
+    # YOUR CODE HERE
+```
+
+```{python}
+def plot_points(db):
+    # YOUR CODE HERE
+```
+
+## Putting together the puzzle
+
+Once all of your teammates ahve comtribnuted their code to the notebook, you can run the code cells below which define and call a function to put each piece of the plot together.
+
+```{python}
+def draw(db):
+    clearscreen()
+    speed(0)
+    draw_axis('x')
+    draw_axis('y')
+    plot_points(db)
+```
+
+## TODO: Creating the database
+
+This is currently a placeholder for the database the students will create and use. I am not sure yet when or how we will teach them to create a database, so this section will change significantly once those things are figured out. This could also be another function/section that a team member works on depending on the way we give/store students' data.
+
+```{python}
+db = []
+for i in range (20):
+    x = randint(-5, 105)
+    y = randint(-5, 105)
+    db.append((x,y))
+```
+
+```{python}
+db = clamp_database(db)
+```
+
+```{python}
+draw(db)
+```
+
+```{python}
+
+```
