@@ -1,6 +1,7 @@
 ---
 jupyter:
   jupytext:
+    formats: ipynb,Rmd
     text_representation:
       extension: .Rmd
       format_name: rmarkdown
@@ -15,6 +16,8 @@ jupyter:
 ```{python}
 # %autosave 0
 ```
+
+testing markdown formatting
 
 # Welcome to a Jupyter Notebook!
 
