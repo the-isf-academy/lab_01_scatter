@@ -1,0 +1,197 @@
+---
+jupyter:
+  jupytext:
+    formats: ipynb,Rmd
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.1'
+      jupytext_version: 1.2.4
+  kernelspec:
+    display_name: Python 3
+    language: python
+    name: python3
+---
+
+```{python}
+# %autosave 0
+```
+
+# Welcome to a Jupyter notebook!
+
+Jupyter Notebooks are interactive interfaces which mix python code with text and output, like if your python files in Atom could talk back to you.
+
+This notebook will walk you through the basics of using Jupyter Notebooks.
+
+
+## First things first *(only do this step once)*
+
+Before you do anything else in this notebook, 💻 **stop and save this file using `cmd/ctrl+s`.** 💻
+
+We actually want to close this notebook and open a very similiar one you just created by saving this file. After closing this file, you will be returned to the Jupyter file navigator. There, you should see a new notebook called `jupyter_intro.ipynb`. 
+
+💻 **Once you close this notebook, click on the `jupyter_intro.ipynb` file to open the notebook.** 💻
+
+💻 **Click on `File > Close and Halt` to close this notebook.** 💻
+
+We'll talk more about what you just did at the end of this notebook.
+
+
+## Running python code
+
+One of the most interesting features of Jupyter notebooks is that they combine code with text almost seemlessly in boxes called cells (the text you're reading right now is in a cell).
+
+So far, you've only seen text cells, but just below is a code cell which contains real, live runnable python code.
+
+💻 **To run it, click on the box and type `shift+enter`.** 💻
+
+```{python}
+pizza_company = "Pizza Hut"
+"{} makes the best pizza in Hong Kong 🍕".format(pizza_company)
+```
+
+This code does the same thing as it would if you typed it in Atom and ran the code from the Terminal. But here, the code's output in *inline* just below the cell.
+
+And the best part? You can edit the code and run it again *in real time*. 
+
+💻 **Change the `pizza_company` variable above to your favorite pizza place and run the code again with `shift+enter`.** 💻
+
+
+Pretty cool, huh?
+
+Better yet, the state of your program persists throughout the entire notebook. That means that the variable you defined above can also be used in the code cell below.
+
+💻 **Run the cell below to see.** 💻
+
+```{python}
+"I wonder what toppings {} has 🤔".format(pizza_company)
+```
+
+However, since the code runs in cells in Jupyter notebooks, the order that you run the cells in matters. For example, if you try to run a code cell that depends on the output of another cell, you have to run the dependent cell second.
+
+💻 **Run the two cells below out of order. What do you think will happen?** 💻
+
+```{python}
+# run me second
+favorite_topping = "pineapple"
+```
+
+```{python}
+# run me first
+"I hope {} has my favorite topping {}".format(pizza_company, favorite_topping)
+```
+
+You got an error message on the `print` statement, right? 
+
+Now, 💻 **run that cell again (after you've run the `favorite_topping` cell** 💻 and the error should go away.
+
+This is a really important idea in Jupyter notebooks. One more time for the people in the back: 🗣 **THE ORDER YOU RUN YOUR CELLS IN MATTERS** 🗣
+
+You can tell if a cell has been run by the `In[ ]` to the left of a cell. 
+   - `In[ ]` means the cell hasn't been run
+   - `In[*]` means the cell is running
+   - `In[n]` means the cell was the `n`th cell to be run (and thus ahs already been run)
+
+
+## Importing modules
+Just like when you're writing Python code in Atom, you can import functions from modules in Jupyter notebooks. The import statement below imports two functions about pizza toppings from the `pizza_toppings` module ( 💻 **make sure you run the cell before moving on** 💻 ).
+
+```{python}
+from pizza_toppings import top_toppings, topping_rank
+```
+
+Now you can use the `top_toppings` and `topping_rank` function anywhere in the notebook! 💻 **Run the code block below to see them in action.** 💻
+
+(Note that in Jupyter notebooks, import statements are usually put in code blocks separate from the rest of the code.)
+
+```{python}
+top_toppings_list = top_toppings()
+print("The top {} pizza toppings are:".format(len(top_toppings_list)))
+for i in range(len(top_toppings_list)):
+    print('{}. {}'.format(i+1, top_toppings_list[i]))
+
+my_topping_rank = topping_rank(favorite_topping)    
+print("My favorite pizza topping, {}, is {}".format(favorite_topping, my_topping_rank))
+```
+
+## Using the turtle
+
+Fortunately for us, you can also run the turtle (and thus all of the code we've already made) from a notebook, with a couple minor tweaks.
+
+💻 **Import the functions from the turtle module like normal.** 💻 
+
+```{python}
+from turtle import clearscreen, forward, right, goto
+```
+
+💻 **Now you can run turtle commands just like you have before.** 💻 
+
+```{python}
+for i in range(4):
+    forward(30)
+    right(90)
+```
+
+Just like all code in notebooks, you can run turtle code in different cells.
+
+💻 **Try running the below and then the code above again.** 💻 
+
+```{python}
+goto(-20, 20)
+```
+
+Sometimes, we'll want to start with a fresh canvas. Rather than closing the notebook and running the entire thing again, we can use the `clearscreen()` function of the turtle.
+
+💻 **Run `clearscreen()` and the more turtle code to see.**
+
+```{python}
+clearscreen()
+```
+
+```{python}
+# try out some turtle code here
+
+
+```
+
+## Putting it all together
+
+Now that you're starting to get the hang of these notebooks, let's talk about the workflow you'll use for working with them.
+
+
+### Opening
+
+Open notebooks using the `jupyer notebook` Terminal command in a directory containing `.ipynb` or `.Rmd` files. This will open the file navigator where you can choose which notebooks you want to open
+
+
+### Saving
+
+Save your files using the `cmd/ctrl+s` keys. This will create 2 versions of your files a `.ipynb` and a `.Rmb` version (more on why later).
+
+Make sure you include `%autosave 0` in the first cell of all your notebooks. Juypter has an autosaving feature, but we will use manual saves to make sure we alwasy have synced `.ipynb` and `.Rmb` files.
+
+
+### Shutting down
+
+When you're done working on a notebook, you can close the notebook by clicking `File > Close and Halt`. You can shut down Jupyer by using the `ctrl+c` keys in the Terminal window you launched Jupyter from.
+
+Another important feature of `.ipynb` files is that they save the state of your program. *This means you don't need to re-run all of the cells in a notebook every time you open it.*
+
+
+### Jupyter and git version control
+
+When you want to commit a version of a notebook you are working on the git. We will commit only the `.Rmb` version (and not the `.ipynb` version). `.Rmb` do not save the state of your program which will simplify what you are storing on GitHub (which will save you a lot of headaches, we promise). This is why we need two versions of each notebook on your local machine.
+
+The git repos you clone for this class will already be set up to only commit the `.Rmb` files. But, when you clone or update a repo from GitHub, you'll only get the `.Rmb` files. This means you'll need to convert them to `.ipynb` files before you start using them.
+
+Fortunately, this is really easy. All you need to do is open a `.Rmb` notebook and save it. This will automatically sync the `.ipynb` file for you and you'll be ready to open the `.ipynb` file and start working. This is actually what you did to this notebook in the very beginning!
+
+🛑 👀 🛑 **TL;DR:*Every time* you clone or pull a repo from github and before you start working in a notebook:**
+   - Open the `.Rmb` version of the notebook
+   - Save the file
+   - Close the file
+   - Open the `.ipynb` file
+
+```{python}
+
+```
