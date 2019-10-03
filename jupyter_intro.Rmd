@@ -168,7 +168,7 @@ Open notebooks using the `jupyer notebook` Terminal command in a directory conta
 
 Save your files using the `cmd/ctrl+s` keys. This will create 2 versions of your files a `.ipynb` and a `.Rmb` version (more on why later).
 
-Make sure you include `%autosave 0` in the first cell of all your notebooks. Juypter has an autosaving feature, but we will use manual saves to make sure we alwasy have synced `.ipynb` and `.Rmb` files.
+Make sure you include `%autosave 0` in the first cell of all your notebooks. Juypter has an autosaving feature, but we will use manual saves to make sure we always have synced `.ipynb` and `.Rmb` files.
 
 
 ### Shutting down

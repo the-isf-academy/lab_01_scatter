@@ -12,6 +12,10 @@ jupyter:
     name: python3
 ---
 
+```{python}
+# %autosave 0
+```
+
 # Creating a scatter plot
 
 Together with your group, you will create a scatter plot to display the relationship between two variables in your data (an x and a y variable).
