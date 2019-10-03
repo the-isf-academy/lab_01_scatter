@@ -3,11 +3,16 @@
 This lab will introduce students to Jupyter Notebooks and ask students to collaborate as a group to create a scatter plotting program in a shared jupyter notebook.
 
 
-## Jupyter notebooks setup
-You can install Jupyter using pip in the Terminal:
+## Jupyter notebooks setup 
+You can install Jupyter using pip in the Terminal (for MAC): 
 
     $ pip install --upgrade pip
-    $pip install --upgrade ipython jupyter jupytext
+    $ pip install --upgrade ipython jupyter jupytext
+    
+You can install Jupyter using pip in the Terminal (for WINDOWS):
+
+    $ sudo apt install python-pip
+    $ pip install --upgrade ipython jupyter jupytext
 
 Our class will work on .ipynb files locally while committing .Rmb files to github to avoid committing the output of notebooks (which causes huge diffs for small changes and makes mergining changes to notebooks ugly and difficult).
 
