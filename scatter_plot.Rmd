@@ -12,10 +12,6 @@ jupyter:
     name: python3
 ---
 
-```{python}
-# %autosave 0
-```
-
 # Creating a scatter plot
 
 Together with your group, you will create a scatter plot to display the relationship between two variables in your data (an x and a y variable).
@@ -47,6 +43,8 @@ Next, we need to define some aspects of the scatterplot we'll be drawing:
    - **tick_size** - the size of the tick mark on the axes
 
 Every function you write will need to use these settings so that the function can draw a scatter plot with any of these settings changed.
+
+Just like in the mannequin lab, we'll be using a dictionary to store the settings of our plot. The key is the name of the setting while the value holds the value of the setting.
 
 ```{python}
 plot_settings = {
@@ -161,7 +159,9 @@ def draw(db):
 
 ## TODO: Creating the database
 
-This is currently a placeholder for the database the students will create and use. I am not sure yet when or how we will teach them to create a database, so this section will change significantly once those things are figured out. This could also be another function/section that a team member works on depending on the way we give/store students' data.
+This is currently a placeholder for the database the students will create and use. We will use a couple simple pathlib functions to pull students data from a CSV.
+
+We also need to add the data to the github repo or place it somewhere for students to access it.
 
 ```{python}
 db = []

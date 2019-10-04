@@ -13,10 +13,6 @@ jupyter:
     name: python3
 ---
 
-```{python}
-# %autosave 0
-```
-
 # Welcome to a Jupyter notebook!
 
 Jupyter Notebooks are interactive interfaces which mix python code with text and output, like if your python files in Atom could talk back to you.
@@ -26,13 +22,13 @@ This notebook will walk you through the basics of using Jupyter Notebooks.
 
 ## First things first *(only do this step once)*
 
-Before you do anything else in this notebook, 💻 **stop and save this file using `cmd/ctrl+s`.** 💻
+Before you do anything else in this notebook, 💻 **stop and save this file using `cmd/ctrl+s`.**
 
 We actually want to close this notebook and open a very similiar one you just created by saving this file. After closing this file, you will be returned to the Jupyter file navigator. There, you should see a new notebook called `jupyter_intro.ipynb`. 
 
-💻 **Once you close this notebook, click on the `jupyter_intro.ipynb` file to open the notebook.** 💻
+💻 **Once you close this notebook, click on the `jupyter_intro.ipynb` file to open the notebook.**
 
-💻 **Click on `File > Close and Halt` to close this notebook.** 💻
+💻 **Click on `File > Close and Halt` to close this notebook.**
 
 We'll talk more about what you just did at the end of this notebook.
 
@@ -43,7 +39,7 @@ One of the most interesting features of Jupyter notebooks is that they combine c
 
 So far, you've only seen text cells, but just below is a code cell which contains real, live runnable python code.
 
-💻 **To run it, click on the box and type `shift+enter`.** 💻
+💻 **To run it, click on the box and type `shift+enter`.**
 
 ```{python}
 pizza_company = "Pizza Hut"
@@ -54,14 +50,14 @@ This code does the same thing as it would if you typed it in Atom and ran the co
 
 And the best part? You can edit the code and run it again *in real time*. 
 
-💻 **Change the `pizza_company` variable above to your favorite pizza place and run the code again with `shift+enter`.** 💻
+💻 **Change the `pizza_company` variable above to your favorite pizza place and run the code again with `shift+enter`.**
 
 
 Pretty cool, huh?
 
 Better yet, the state of your program persists throughout the entire notebook. That means that the variable you defined above can also be used in the code cell below.
 
-💻 **Run the cell below to see.** 💻
+💻 **Run the cell below to see.**
 
 ```{python}
 "I wonder what toppings {} has 🤔".format(pizza_company)
@@ -69,7 +65,7 @@ Better yet, the state of your program persists throughout the entire notebook. T
 
 However, since the code runs in cells in Jupyter notebooks, the order that you run the cells in matters. For example, if you try to run a code cell that depends on the output of another cell, you have to run the dependent cell second.
 
-💻 **Run the two cells below out of order. What do you think will happen?** 💻
+💻 **Run the two cells below out of order. What do you think will happen?**
 
 ```{python}
 # run me second
@@ -83,7 +79,7 @@ favorite_topping = "pineapple"
 
 You got an error message on the `print` statement, right? 
 
-Now, 💻 **run that cell again (after you've run the `favorite_topping` cell** 💻 and the error should go away.
+Now, 💻 **run that cell again (after you've run the `favorite_topping` cell)** and the error should go away.
 
 This is a really important idea in Jupyter notebooks. One more time for the people in the back: 🗣 **THE ORDER YOU RUN YOUR CELLS IN MATTERS** 🗣
 
@@ -94,13 +90,13 @@ You can tell if a cell has been run by the `In[ ]` to the left of a cell.
 
 
 ## Importing modules
-Just like when you're writing Python code in Atom, you can import functions from modules in Jupyter notebooks. The import statement below imports two functions about pizza toppings from the `pizza_toppings` module ( 💻 **make sure you run the cell before moving on** 💻 ).
+Just like when you're writing Python code in Atom, you can import functions from modules in Jupyter notebooks. The import statement below imports two functions about pizza toppings from the `pizza_toppings` module ( 💻 **make sure you run the cell before moving on**).
 
 ```{python}
 from pizza_toppings import top_toppings, topping_rank
 ```
 
-Now you can use the `top_toppings` and `topping_rank` function anywhere in the notebook! 💻 **Run the code block below to see them in action.** 💻
+Now you can use the `top_toppings` and `topping_rank` function anywhere in the notebook! 💻 **Run the code block below to see them in action.**
 
 (Note that in Jupyter notebooks, import statements are usually put in code blocks separate from the rest of the code.)
 
@@ -118,13 +114,14 @@ print("My favorite pizza topping, {}, is {}".format(favorite_topping, my_topping
 
 Fortunately for us, you can also run the turtle (and thus all of the code we've already made) from a notebook, with a couple minor tweaks.
 
-💻 **Import the functions from the turtle module like normal.** 💻 
+💻 **Import the functions from the turtle module like normal.**
+
 
 ```{python}
 from turtle import clearscreen, forward, right, goto
 ```
 
-💻 **Now you can run turtle commands just like you have before.** 💻 
+💻 **Now you can run turtle commands just like you have before.**
 
 ```{python}
 for i in range(4):
@@ -134,7 +131,7 @@ for i in range(4):
 
 Just like all code in notebooks, you can run turtle code in different cells.
 
-💻 **Try running the below and then the code above again.** 💻 
+💻 **Try running the below and then the code above again.**
 
 ```{python}
 goto(-20, 20)
@@ -168,7 +165,7 @@ Open notebooks using the `jupyer notebook` Terminal command in a directory conta
 
 Save your files using the `cmd/ctrl+s` keys. This will create 2 versions of your files a `.ipynb` and a `.Rmb` version (more on why later).
 
-Make sure you include `%autosave 0` in the first cell of all your notebooks. Juypter has an autosaving feature, but we will use manual saves to make sure we always have synced `.ipynb` and `.Rmb` files.
+Jupyter will also auto save your file every 2 minutes, but you should `cmd/ctrl+s` before you close your notebook.
 
 
 ### Shutting down
