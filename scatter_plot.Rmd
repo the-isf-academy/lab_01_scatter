@@ -29,6 +29,8 @@ First, we'll import the functions to draw using the turtle libray.
 ```{python}
 from random import randint
 from turtle import *
+from pathlib import Path
+import pandas as pd
 ```
 
 Next, we need to define some aspects of the scatterplot we'll be drawing:
@@ -113,16 +115,41 @@ def scale(x, old_domain, new_domain):
     return new_x
 ```
 
-### 💻 draw_axis( )
+### 💻 draw_x_axis( ) and draw_y_axis( )
 
-This function is responsible for drawing the x- and y- axis of the scatter plot along with tick marks marking the distance. This function should be abstracted so that it can draw either the x- or y-axis based on the `ax` paramenter (which will either be a string `'x'` or `'y'`).
+These functions are responsible for drawing the x- and y- axis of the scatter plot along with tick marks marking the distance. We've group these functions together because they will be very similar (but with a few important differences). 
 
 To accomplish this task, you'll need to think about how to draw tick marks that are distanced based on the size of the plot but that represent increments relative to the domain of the axis. For example, say your axis has a length of 100 turtle distance units and a domain between 0-10. If you wanted to draw ticks for each integer in the domain (0, 1, 2, ..., 10), you would need to draw 11 ticks each spaced 10 turtle distance units apart.
 
-Additionally, you'll need to think about how to make this function work for bothe the x- and y-axis. The manequin project from unit 0 could offer some insights into how to do this.
+To help you out, we've written two helper functions:
+
+* `draw_tick( )` draws a tick of `tick_size` (defined in the settings dictionary) centered at the turtle's current location and parallel to the direction the turtle is facing.
+
+* `label_tick(num)` takes an integer `num` and adds a label `5*tick_size` ahead of the turtle's current location and heading.
 
 ```{python}
-def draw_axis(ax):
+def draw_tick():
+    pendown()
+    forward(plot_settings['tick_size']/2)
+    backward(plot_settings['tick_size'])
+    forward(plot_settings['tick_size']/2)
+    penup()
+```
+
+```{python}
+def label_tick(num):
+    forward(plot_settings['tick_size']*5)
+    write("{}".format(num), move=False, align="center", font=("Arial", 8, "normal"))
+    backward(plot_settings['tick_size']*5)
+```
+
+```{python}
+def draw_x_axis():
+    # YOUR CODE HERE
+```
+
+```{python}
+def draw_y_axis():
     # YOUR CODE HERE
 ```
 
@@ -152,8 +179,8 @@ Once all of your teammates ahve comtribnuted their code to the notebook, you can
 def draw(db):
     clearscreen()
     speed(0)
-    draw_axis('x')
-    draw_axis('y')
+    draw_x_axis()
+    draw_y_axis()
     plot_points(db)
 ```
 
@@ -162,6 +189,20 @@ def draw(db):
 This is currently a placeholder for the database the students will create and use. We will use a couple simple pathlib functions to pull students data from a CSV.
 
 We also need to add the data to the github repo or place it somewhere for students to access it.
+
+```{python}
+def get_data():
+    filename = "ISF_air_pollution_dataset.csv"
+    return Path(filename).read_text().split()
+```
+
+```{python}
+db = get_data()
+```
+
+```{python}
+db
+```
 
 ```{python}
 db = []
