@@ -7,7 +7,7 @@ This lab will introduce students to Jupyter Notebooks and ask students to collab
 You can install Jupyter using pip in the Terminal:
 
     $ pip install --upgrade pip
-    $ pip install --upgrade ipython jupyter jupytext
+    $ pip install --upgrade ipython jupyter jupytext pandas
     
 Our class will work on .ipynb files locally while committing .Rmb files to github to avoid committing the output of notebooks (which causes huge diffs for small changes and makes mergining changes to notebooks ugly and difficult).
 
@@ -32,7 +32,7 @@ You can install Jupyter using pip in the Terminal:
 
     $ python3 -m pip install --upgrade pip
     $ python3 -m pip install --user jupyter
-    $ python3 -m pip install --upgrade --user ipython jupyter jupytext
+    $ python3 -m pip install --upgrade --user ipython jupyter jupytext pandas
     $ vim ~/.bashrc
      
 Inside bashrc, scroll to the very end of the document. Press `I`.
