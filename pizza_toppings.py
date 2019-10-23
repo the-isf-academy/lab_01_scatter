@@ -29,4 +29,6 @@ def topping_rank(topping):
     if not topping in top_toppings_list:
         return "very unique"
     else:
-        return top_toppings_list.index(topping)
+        return top_toppings_list.index(topping)+1
+
+

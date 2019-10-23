@@ -96,9 +96,31 @@ Just like when you're writing Python code in Atom, you can import functions from
 from pizza_toppings import top_toppings, topping_rank
 ```
 
-Now you can use the `top_toppings` and `topping_rank` function anywhere in the notebook! 💻 **Run the code block below to see them in action.**
+Now you can use the `top_toppings` and `topping_rank` function anywhere in the notebook!
 
 (Note that in Jupyter notebooks, import statements are usually put in code blocks separate from the rest of the code.)
+
+`top_toppings()` is a function that returns a list of the top 10 pizza toppings from a dataset stored in the `pizza_toppings.py` file. 
+
+To see the top pizza toppings, first we need to store the return value of that function so we have access to that list. 💻 **Run the code block below to store the return value of `top_toppinggs()` in the `top_toppings_list` variable.**
+
+```{python}
+top_toppings_list = top_toppings()
+```
+
+Now, you probably want to see what that list contains. Jupyter notebooks offer an easy way to look inside of data structures.
+
+💻 **Just type the name of the variable or the data structure you want to see and run the cell.** No need to do anything else.
+
+```{python}
+top_toppings_list
+```
+
+After you've imported functions into a Jupyter notebook, you can call them anywhere in the notebook. 
+
+The `topping_rank()` function takes a topping an returns the rank of the toppoing according to the dataset in the `pizza_toppings.py` file. 
+
+**Run the cell below to use the `topping_rank()` function to check what rank your favorite topping is.**
 
 ```{python}
 top_toppings_list = top_toppings()
@@ -183,7 +205,7 @@ The git repos you clone for this class will already be set up to only commit the
 
 Fortunately, this is really easy. All you need to do is open a `.Rmb` notebook and save it. This will automatically sync the `.ipynb` file for you and you'll be ready to open the `.ipynb` file and start working. This is actually what you did to this notebook in the very beginning!
 
-🛑 👀 🛑 **TL;DR:*Every time* you clone or pull a repo from github and before you start working in a notebook:**
+🛑 👀 🛑 **TL;DR: *Every time* you clone or pull a repo from github and before you start working in a notebook:**
    - Open the `.Rmb` version of the notebook
    - Save the file
    - Close the file

@@ -27,9 +27,7 @@ First, we'll import the functions to draw using the turtle libray.
 (Here, I'm also importating from random to make a database but the students will have real data)
 
 ```{python}
-from random import randint
 from turtle import *
-from pathlib import Path
 import pandas as pd
 ```
 
@@ -46,18 +44,16 @@ Next, we need to define some aspects of the scatterplot we'll be drawing:
 
 Every function you write will need to use these settings so that the function can draw a scatter plot with any of these settings changed.
 
-Just like in the mannequin lab, we'll be using a dictionary to store the settings of our plot. The key is the name of the setting while the value holds the value of the setting.
-
 ```{python}
 plot_settings = {
     'origin_screen_x': -100,
     'origin_screen_y': -100,
     'x_axis_length': 300,
     'y_axis_length': 300,
-    'x_axis_domain': (0,100),
-    'x_axis_increment': 5,
-    'y_axis_domain': (0,100),
-    'y_axis_increment': 5,
+    'x_axis_domain': (0,1439),
+    'x_axis_increment': 120,
+    'y_axis_domain': (26,32),
+    'y_axis_increment': 1,
     'tick_size': 4
 }
 ```
@@ -81,9 +77,10 @@ def clamp_database(db):
     x_domain = (x_axis_low, x_axis_high)
     y_domain = (y_axis_low, y_axis_high)
     for i in range(len(db)):
-        x_clamp = clamp_point(db[i][0], x_domain)
-        y_clamp = clamp_point(db[i][1], y_domain)
-        db[i] = (x_clamp, y_clamp)
+        x_clamp = clamp_point(db.iloc[i][0], x_domain)
+        y_clamp = clamp_point(db.iloc[i][1], y_domain)
+        db.iloc[i, 0] = x_clamp
+        db.iloc[i, 1] = y_clamp
     return db
 ```
 
@@ -111,7 +108,7 @@ For the `scale()` function, the `old_domain` and `new_domain` parameters will be
 
 ```{python}
 def scale(x, old_domain, new_domain):
-    # YOUR CODE HERE
+
     return new_x
 ```
 
@@ -145,17 +142,24 @@ def label_tick(num):
 
 ```{python}
 def draw_x_axis():
-    # YOUR CODE HERE
+
 ```
 
 ```{python}
 def draw_y_axis():
-    # YOUR CODE HERE
+
 ```
 
 ### 💻 plot_points( )
 
 Finally, you will need to actually plot the points on the scatter plot. This will consist of going through each point in your database and determining what each point's location will be on the turtle screen.
+
+You will recieve data in a list variable, `data_points_list`, which is a list of `(x, y)` data points. You can access the x and y data points like this:
+    
+    data_point = data_points_list[0] #This takes the 0th data point from the list
+    
+    x = data_point[0]
+    y = data_point[1]
 
 You can assume that your teammates will provide you with a scale function described above. This will be helpful when determing what a point's scaled values will be, but you will need to figure out what domain you need to scale from and what domain you will scale to.
 
@@ -163,61 +167,95 @@ To help you out, we've pulled out another function `make_cross()` which should b
 
 ```{python}
 def make_cross():
-    # YOUR CODE HERE
+    pendown()
+    pencolor('blue')
+    setheading(0)
+    for i in range(2):
+        forward(plot_settings['tick_size']/2)
+        backward(plot_settings['tick_size'])
+        forward(plot_settings['tick_size']/2)
+        right(90)
+    penup()
 ```
 
 ```{python}
-def plot_points(db):
-    # YOUR CODE HERE
+def plot_points(data_points_list):
+
 ```
 
 ## Putting together the puzzle
 
-Once all of your teammates ahve comtribnuted their code to the notebook, you can run the code cells below which define and call a function to put each piece of the plot together.
+Once all of your teammates ahve contributed their code to the notebook, you can run the code cell below which defines a function to put each piece of the plot together.
 
 ```{python}
-def draw(db):
+def draw(data_points_list):
     clearscreen()
     speed(0)
     draw_x_axis()
     draw_y_axis()
-    plot_points(db)
+    plot_points(data_points_list)
+    hideturtle()
 ```
 
-## TODO: Creating the database
+## Accessing the data
 
-This is currently a placeholder for the database the students will create and use. We will use a couple simple pathlib functions to pull students data from a CSV.
+Now that we've got all the functions we need to draw the scatter plot, all we need to do is pass some data into those functions.
 
-We also need to add the data to the github repo or place it somewhere for students to access it.
+**Don't worry too much about this code right now.** We'll go over it in depth later. 
+
+For now, all you need to know is that the file containing the data you want to use should be a `.csv` file. You pass the file path as a string into the `.read_csv()` function (currently the file path is `ISF_air_pollution_dataset.csv`).
 
 ```{python}
-def get_data():
-    filename = "ISF_air_pollution_dataset.csv"
-    return Path(filename).read_text().split()
+df = pd.read_csv('ISF_air_pollution_dataset.csv',';')
+
+df
 ```
 
-```{python}
-db = get_data()
-```
+Then, you chose which two columns of the data you want to use by putting names of the columns as strings into the `df[[]]` access operator. Currently, we're using the `Time` and `Temperature` columns of our dataset.
+
+Here, we're also transforming the data to make it easier to work with. Specifically, we're changing the time stamp column to be minutes after 9:00 am and we're cutting out some of the data to make the Turtle draw faster.
+
+*NOTE: This code cell may give you a warning when you run it. That's ok, it's just letting us know that we're changing the data in the data structure which is exactly what we want to do.*
 
 ```{python}
-db
+df_two_col = df[['Time', 'Temperature']]
+for i in range(len(df_two_col)):
+    df_two_col.iloc[i,0] = i%(60*24)
+df_two_col = df_two_col.drop([i for i in range(len(df_two_col)) if i%60 != 0 and i%60 != 29])
+
+
+df_two_col
 ```
 
-```{python}
-db = []
-for i in range (20):
-    x = randint(-5, 105)
-    y = randint(-5, 105)
-    db.append((x,y))
-```
+Next, we'll use the `clamp_database()` function to make sure all of our data falls within the domain of the chart we want to draw.
+
+*NOTE: This code cell may give you a warning when you run it. That's ok, it's just letting us know that we're changing the data in the data structure when we call the `clamp_database()` function which is exactly what we want to do.*
 
 ```{python}
-db = clamp_database(db)
+df_two_col_clamp = clamp_database(df_two_col)
 ```
 
+Finally, we need to change the data into a structure you're familiar with. Currently, it's in a dataframe, something we'll talk about more later.
+
+For now, we'll put the data in a list, `data_points_list` as `(x, y)` pairs.
+
 ```{python}
-draw(db)
+data_points_list = [(x,y) for x, y in df_two_col_clamp.values]
+data_points_list
+```
+
+## Make the scatter plot
+
+Finally, after all our hard work, we can make the scatterplot!
+
+```{python}
+draw(data_points_list)
+```
+
+When you're ready to close the Turtle window, you can run the following code cell:
+
+```{python}
+bye()
 ```
 
 ```{python}
