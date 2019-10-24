@@ -30,8 +30,8 @@ Now, you're ready to easily use git for version control with Jupyter notebooks u
 ## Jupyter notebooks setup (for WINDOWS)
 You can install Jupyter using pip in the Terminal:
 
-    $ sudo apt-get update
-    $ sudo apt-get install python3-pip
+    $ sudo apt update
+    $ sudo apt install python3-pip
     $ pip3 install --upgrade pip
     $ pip3 install --user jupyter
     $ pip3 install --upgrade --user ipython jupyter jupytext pandas
